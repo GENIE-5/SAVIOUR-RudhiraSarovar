@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "449601597219",
+    "project_id": "saviour-315415",
+    "storage_bucket": "saviour-315415.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449601597219:android:60f70798b8832a4d7d6696",
+        "android_client_info": {
+          "package_name": "com.genie.saviour_flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "449601597219-1pu27597mipmih4kfd7gnocsnthi063b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQfPh1yJSc825oAVFz21l7KypKkX8sh2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "449601597219-1pu27597mipmih4kfd7gnocsnthi063b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

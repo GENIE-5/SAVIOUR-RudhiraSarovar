@@ -1,22 +1,33 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:saviour_flutter_app/screens/home.dart';
-import 'package:saviour_flutter_app/screens/signinscreen.dart';
+
 
 class AuthService{
 
+
+String registerEmail="";
+String registerPassword="";
+String registerUsername="";
 //final FirebaseAuth _auth=FirebaseAuth.instance;
 
 
+void setRegisterprocess(email,username,password){
+  this.registerPassword=password;
+  this.registerEmail=email;
+  this.registerUsername=username;
 
+  print("Set register email :"+this.registerEmail);
+
+}
 
 Future<bool> registerWithEmailAndPass() async{
+
+
+  print("email in registration :"+this.registerEmail);
   try {
   UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: "vinaykohli@gmail.com",
-    password: "viratkohli@123"
+    email: this.registerEmail,
+    password: this.registerPassword
   );
 
 
@@ -27,8 +38,10 @@ return true;
 } on FirebaseAuthException catch (e) {
   if (e.code == 'weak-password') {
     print('The password provided is too weak.');
+    return false;
   } else if (e.code == 'email-already-in-use') {
     print('The account already exists for that email.');
+    return false;
   }
 } catch (e) {
   print(e);
@@ -41,11 +54,13 @@ return false;
 }
 
 
-Future<bool> signInWithEmailAndPassword() async{
+Future<bool> signInWithEmailAndPassword(email,password) async{
 
 try{
 
-UserCredential userCredential=await FirebaseAuth.instance.signInWithEmailAndPassword(email: "vinaykohli@gmai.com", password: "viratkohli@123"); 
+UserCredential userCredential=await FirebaseAuth.instance.signInWithEmailAndPassword(
+  email: email,
+   password: password ); 
 
 print(userCredential.user!.email);
 print("sign is successful");
@@ -64,25 +79,3 @@ return true;
 }
 
 
-class FirstScreen extends StatefulWidget {
-  const FirstScreen({ Key? key }) : super(key: key);
-
-  @override
-  _FirstScreenState createState() => _FirstScreenState();
-}
-
-class _FirstScreenState extends State<FirstScreen> {
-  @override
-  Widget build(BuildContext context) {
-
-final user=Provider.of(context);
-
-if(user==null)
-return SignInPage();
-
-    print("user is "+user);
-
-    return HomePage();
-
-}
-}

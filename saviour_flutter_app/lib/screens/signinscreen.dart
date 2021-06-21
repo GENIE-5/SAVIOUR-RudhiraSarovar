@@ -39,132 +39,166 @@ final _formKey=GlobalKey<FormState>();
 
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("SignUp"),
         backgroundColor: Colors.redAccent[200],
       ),
-     body:Column(
-       crossAxisAlignment: CrossAxisAlignment.center,
-       children: [
-         
-         Padding(
-           padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0),
-           child: Form(
-             key: _formKey,
-             child: 
-           Column(
-              children: [
-    
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "Email",
-
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.only(right: 20, left: 20),
-                      child: Icon(
-                        Icons.account_circle,
-                      ),
-                    ),
-
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))
-                    
-                  ),
-                 
-                  onChanged: (value){
-                    email=value;
-                  },
+     body:SingleChildScrollView(
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.center,
+         children: [
+           Padding(
+             padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0),
+             child: Form(
+               autovalidateMode: AutovalidateMode.always, key: _formKey,
+               child: 
+             Column(
+                children: [
+                  
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Email",
                 
-                ),
-                SizedBox(height: 20.0,),
-                TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Password",
-                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.only(right: 20, left: 20),
-                      child: Icon(
-                        Icons.lock,
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.only(right: 20, left: 20),
+                        child: Icon(
+                          Icons.account_circle,
+                        ),
                       ),
+                
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))
+                      
                     ),
                    
-                ),
-                  obscureText: true,
-                  onChanged: (value){
-                    password=value;
-                  },
+                    onChanged: (value){
+                      email=value;
+                      
+                    },
+                    validator: (value){
+                
+                      if(value!.isEmpty)
+                      return "Required";
+                      if(!value.endsWith("@gmail.com"))
+                      {
+                        return "not a vaild email";
+                
+                      }
+                      
+                
+                      return null;
+                
+                
+                    },
                   
-                ),
-                Row(
+                  ),
+                  SizedBox(height: 20.0,),
+                  TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.only(right: 20, left: 20),
+                        child: Icon(
+                          Icons.lock,
+                        ),
+                      ),
+                     
+                  ),
+                    obscureText: true,
+                    onChanged: (value){
+                      password=value;
+                    },
+                
+                    validator: (value){
+                      if(value!.isEmpty)
+                      return "Required";
+                
+                      else
+                      return null;
+                    },
+                    
+                  ),
+                  Row(
+                    
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(onPressed: (){
+                
+                      }, child:Text("Forgot password?"),
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all(Colors.red[300])
+                      ), ),
+                    ],
+                  ),
+                
+                
+                  ElevatedButton(onPressed: () async{
+                
+                    if(_formKey.currentState!.validate()==true)
+                    {
+                       dynamic check =await AuthService().signInWithEmailAndPassword(this.email,this.password);
+                
+                  if(check==true) 
+                  {
+                
+                    Navigator.of(context).pop();
+                     Navigator.push(context, MaterialPageRoute(builder:(context){
+                      return HomePage();
+                    }));
+                
+                  }
+                   
+               else{
+                
+                    setState(() {
+                          errstring='Password is not matched';
+                       });
+                
+                 }
+                
+                
+                    }
+                
                   
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(onPressed: (){
-
-                    }, child:Text("Forgot password?"),
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.red[300])
-                    ), ),
-                  ],
-                ),
-              
-
-                ElevatedButton(onPressed: () async{
-
-                 dynamic check =await AuthService().signInWithEmailAndPassword();
-
-                if(check==true) 
-                {
-
-                  Navigator.of(context).pop();
-                   Navigator.push(context, MaterialPageRoute(builder:(context){
-                    return HomePage();
-                  }));
-
-                }
-                 
-             else{
-
-                  setState(() {
-                        errstring='Password is not matched';
-                     });
-
-               }
-                  
-
-            },
-                 child:Text("Login"),
-
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red)
-                ),
-                 
-                 ),
-
-                 
-
-                 Row(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: [
-                     Text("Not have an account ?"),
-                     TextButton(
-                       child: Text("Register"),
-                       onPressed: (){
-                         Navigator.push(context, MaterialPageRoute(builder: (context){
-                           return RegisterScreen();
-
-                         }));
-                       },
-                     ),
-                   ],
-                 )
-
-
-
-              ],
+                    
+                
+              },
+                   child:Text("Login"),
+                
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.red)
+                  ),
+                   
+                   ),
+                
+                   
+                
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       Text("Not have an account ?"),
+                       TextButton(
+                         child: Text("Register"),
+                         onPressed: (){
+                           
+                           Navigator.push(context, MaterialPageRoute(builder: (context){
+                             return RegisterScreen();
+                
+                           }));
+                         },
+                       ),
+                     ],
+                   )
+                
+                
+                
+                ],
+             ),
+             ),
            ),
-           ),
-         ),
-       ],
+         ],
+       ),
      ), 
     );
   }

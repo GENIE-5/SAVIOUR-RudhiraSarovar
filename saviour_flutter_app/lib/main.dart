@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:saviour_flutter_app/blocs/application_bloc.dart';
 //import 'package:saviour_flutter_app/screens/authenticate.dart';
 import 'package:saviour_flutter_app/screens/signinscreen.dart';
 //import 'package:provider/provider.dart';
@@ -19,12 +21,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-  
-        
-        return
-         MaterialApp(
+        return ChangeNotifierProvider(create:  (context)=>ApplicationBloc(),
+         child:MaterialApp(
             home: SignInPage(),
-        
+        )
         );
       
   }

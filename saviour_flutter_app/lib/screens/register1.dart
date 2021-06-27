@@ -26,6 +26,7 @@ String registerPassword='';
 String registerUsername="";
 
 _Register1ScreenState(this.registerUsername,this.registerEmail,this.registerPassword);
+ 
   @override
   Widget build(BuildContext context) {
     var _bloodGroups = [
@@ -64,37 +65,32 @@ return showDialog(context: context, builder:(context){
 
     return Scaffold(
         body: SingleChildScrollView(
-
-
             child: Form(
-              child: Column(children: [
-            
-            
-                  AppBar(
-                    leading: IconButton(
+      child: Column(children: [
+        AppBar(
+          leading: IconButton(
               icon: Icon(Icons.arrow_back_ios),
               onPressed: () {
                 Navigator.pop(context);
               }),
-                  ),
-            
-                  
-                  Container(height: deviceHeight * 0.2),
-            
-                  //MobileNumber Field
-            
-                  Container(
-                    width: deviceWidth,
-                    margin: EdgeInsets.only(
+        ),
+
+        Container(height: deviceHeight * 0.2),
+
+        //MobileNumber Field
+
+        Container(
+          width: deviceWidth,
+          margin: EdgeInsets.only(
               left: deviceWidth * 0.3, bottom: deviceHeight * 0.03),
-                    child: Text(
-                      'Mobile Number',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Container(
+          child: Text(
+            'Mobile Number',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Row(
+          children: [
+            Container(
               width: deviceWidth * 0.25,
               height: deviceHeight * 0.08,
               margin: EdgeInsets.only(left: deviceWidth * 0.1),
@@ -103,10 +99,9 @@ return showDialog(context: context, builder:(context){
                   accentColor: Colors.red,
                 ),
                 child: TextFormField(
-                 // initialValue: "+91",
+                  // initialValue: "+91",
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    
                       prefixIconConstraints:
                           BoxConstraints(minWidth: 23, maxHeight: 20),
                       prefixIcon: Padding(
@@ -114,25 +109,21 @@ return showDialog(context: context, builder:(context){
                         child: Icon(Icons.flag),
                       ),
                       hintText: ("Code"),
-                    
-
                       hintStyle: TextStyle(
                           color: Colors.grey, fontSize: deviceHeight * 0.015),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0))),
                   controller: phoneCodeController,
-                  validator: (value){
-                    if(value!.isEmpty)
-                    return "Required";
+                  validator: (value) {
+                    if (value!.isEmpty)
+                      return "Required";
                     else
-                    return null;
+                      return null;
                   },
-
-
                 ),
               ),
-                      ),
-                      Container(
+            ),
+            Container(
               width: deviceWidth * 0.45,
               height: deviceHeight * 0.08,
               margin: EdgeInsets.only(left: deviceWidth * 0.1),
@@ -153,52 +144,51 @@ return showDialog(context: context, builder:(context){
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0))),
                   controller: phoneNumberController,
-                  validator: (value){
-                    if(value!.isEmpty)
-                    return "Required";
+                  validator: (value) {
+                    if (value!.isEmpty)
+                      return "Required";
                     else
-                    return null;
+                      return null;
                   },
-
-
                 ),
               ),
-                      ),
-                    ],
-                  ),
-                  Container(height: deviceHeight * 0.1),
-            
-                  //Blood Group Text
-                  Container(
-                    width: deviceWidth,
-                    margin: EdgeInsets.only(
+            ),
+          ],
+        ),
+        Container(height: deviceHeight * 0.1),
+
+        //Blood Group Text
+        Container(
+          width: deviceWidth,
+          margin: EdgeInsets.only(
               left: deviceWidth * 0.3, bottom: deviceHeight * 0.03),
-                    child: Text(
-                      'Your Blood Group',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  DropdownButton<String>(
-                    items: _bloodGroups.map((String dropDownStringItem) {
-                      return DropdownMenuItem<String>(
+          child: Text(
+            'Your Blood Group',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+        DropdownButton<String>(
+          items: _bloodGroups.map((String dropDownStringItem) {
+            return DropdownMenuItem<String>(
                 value: dropDownStringItem, child: Text(dropDownStringItem));
-                    }).toList(),
-                    onChanged: (newValueSelected) {
-                      setState(() {
+          }).toList(),
+          onChanged: (newValueSelected) {
+            setState(() {
               this.bloodGroupSelected = newValueSelected.toString();
-                      });
-                    },
-                    value: bloodGroupSelected,
-                  ),
-                  
-                  //SignUp Button
-                  
-                  Container(
-                      padding: EdgeInsets.only(top: 25),
-                      child: Container(
+            });
+          },
+          value: bloodGroupSelected,
+        ),
+
+        //SignUp Button
+
+        Container(
+            padding: EdgeInsets.only(top: 25),
+            child: Container(
               width: deviceWidth * 0.4,
               child: ElevatedButton(
                 child: Text("Sign Up"),
+
                 onPressed: ()async {
                   
             
@@ -208,12 +198,12 @@ return showDialog(context: context, builder:(context){
                  if(result==true){
                    print("Registration Successful");
                    
+ 
                   Navigator.of(context).pop();
                   Navigator.of(context).pop();
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SignInPage()),
-                    
                   );
 
               }
@@ -226,8 +216,8 @@ return showDialog(context: context, builder:(context){
                 
                 },
               ),
-                      )),
-                ]),
-            )));
+            )),
+      ]),
+    )));
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:saviour_flutter_app/screens/authenticate.dart';
@@ -9,34 +8,27 @@ import 'package:saviour_flutter_app/screens/registration.dart';
 //import 'package:form_validator/form_validator.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({ Key? key }) : super(key: key);
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   _SignInPageState createState() => _SignInPageState();
 }
 
 class _SignInPageState extends State<SignInPage> {
-
-String email="";
-String text="";
-String password="";
-String errstring="";
-final _formKey=GlobalKey<FormState>();
+  String email = "";
+  String text = "";
+  String password = "";
+  String errstring = "";
+  final _formKey = GlobalKey<FormState>();
 
 //final builder=ValidationBuilder(locale: locale);
 
   @override
   Widget build(BuildContext context) {
-
-    if(FirebaseAuth.instance.currentUser!=null){
-
+    if (FirebaseAuth.instance.currentUser != null) {
       print(FirebaseAuth.instance.currentUser);
       return HomePage();
     }
-
-
-
-
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -44,6 +36,7 @@ final _formKey=GlobalKey<FormState>();
         title: Text("SignUp"),
         backgroundColor: Colors.redAccent[200],
       ),
+
      body:SingleChildScrollView(
        
 
@@ -70,6 +63,7 @@ final _formKey=GlobalKey<FormState>();
                           padding: const EdgeInsets.only(right: 20, left: 20),
                           child: Icon(
                             Icons.account_circle,
+ 
                           ),
                         ),
                   
@@ -209,9 +203,6 @@ final _formKey=GlobalKey<FormState>();
                          ),
                        ],
                      )
-                  
-                  
-                  
                   ],
                ),
                ),

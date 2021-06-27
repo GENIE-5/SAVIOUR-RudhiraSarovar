@@ -11,6 +11,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
 
   final _registrationKey=GlobalKey<FormState>();
+  final service = GlobalObjectKey(AuthService());
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -188,12 +189,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     if(_registrationKey.currentState!.validate())
                     {
                       print("email in frst registration :"+email.text);
-                      AuthService().setRegisterprocess(email.text,userNameController.text,passwordController.text);
+                     // AuthService as=AuthService();
+                     // as.setRegisterprocess(email.text,userNameController.text,passwordController.text);
                       
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Register1Screen()),
+                          builder: (context) => Register1Screen(
+                            username: userNameController.text,
+                            email: email.text,
+                            password: passwordController.text,
+                          )),
                     );
 
                     }

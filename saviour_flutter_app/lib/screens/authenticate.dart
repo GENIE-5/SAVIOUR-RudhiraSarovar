@@ -4,46 +4,32 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService{
 
+//Registeration of new user using email and password
+Future<bool> registerWithEmailAndPass(registerEmail,registerPassword) async{
 
-String registerEmail="";
-String registerPassword="";
-String registerUsername="";
-//final FirebaseAuth _auth=FirebaseAuth.instance;
-
-
-void setRegisterprocess(email,username,password){
-  this.registerPassword=password;
-  this.registerEmail=email;
-  this.registerUsername=username;
-
-  print("Set register email :"+this.registerEmail);
-
-}
-
-Future<bool> registerWithEmailAndPass() async{
-
-
-  print("email in registration :"+this.registerEmail);
   try {
   UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: this.registerEmail,
-    password: this.registerPassword
+    email: registerEmail,
+    password: registerPassword
   );
-
-
 
   print(userCredential);
 return true;
 
-} on FirebaseAuthException catch (e) {
+} on 
+FirebaseAuthException
+ catch (e)
+ {
   if (e.code == 'weak-password') {
     print('The password provided is too weak.');
     return false;
-  } else if (e.code == 'email-already-in-use') {
+  }
+   else if (e.code == 'email-already-in-use') {
     print('The account already exists for that email.');
     return false;
   }
-} catch (e) {
+}
+ catch (e) {
   print(e);
   return false;
 }
@@ -53,7 +39,7 @@ return false;
 
 }
 
-
+//Login of a user using email and password
 Future<bool> signInWithEmailAndPassword(email,password) async{
 
 try{
@@ -63,7 +49,7 @@ UserCredential userCredential=await FirebaseAuth.instance.signInWithEmailAndPass
    password: password ); 
 
 print(userCredential.user!.email);
-print("sign is successful");
+
 
 return true;
 

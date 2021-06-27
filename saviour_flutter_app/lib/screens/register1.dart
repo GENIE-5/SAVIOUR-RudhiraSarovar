@@ -5,21 +5,28 @@ import 'package:saviour_flutter_app/screens/authenticate.dart';
 import 'package:saviour_flutter_app/screens/signinscreen.dart';
 
 class Register1Screen extends StatefulWidget {
+
+  final username;
+  final password;
+  final email;
+
+  Register1Screen({Key? key,required this.username,required  this.email,required this.password}):super(key:key);
   @override
-  _Register1ScreenState createState() => _Register1ScreenState();
+  _Register1ScreenState createState() => _Register1ScreenState(username,email,password);
 }
 
 class _Register1ScreenState extends State<Register1Screen> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  // TextEditingController _email = TextEditingController();
   TextEditingController phoneCodeController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   var bloodGroupSelected = 'A+';
-  String registerEmail = '';
-  String registerPassword = '';
+String registerEmail='';
+String registerPassword='';
+String registerUsername="";
 
-  Register1Screen(registerEmail, registerPassword) {}
+_Register1ScreenState(this.registerUsername,this.registerEmail,this.registerPassword);
+ 
   @override
   Widget build(BuildContext context) {
     var _bloodGroups = [
@@ -36,6 +43,26 @@ class _Register1ScreenState extends State<Register1Screen> {
 
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
+
+ createDialogBox(BuildContext context){
+return showDialog(context: context, builder:(context){
+  return AlertDialog(
+    title: Text("email is already registered"),
+    actions: [
+      ElevatedButton(
+        onPressed: 
+      (){
+        Navigator.of(context).pop();
+      }, 
+      child:Text("click to change"))
+    ],
+
+  );
+});
+}
+
+
+
     return Scaffold(
         body: SingleChildScrollView(
             child: Form(
@@ -161,22 +188,32 @@ class _Register1ScreenState extends State<Register1Screen> {
               width: deviceWidth * 0.4,
               child: ElevatedButton(
                 child: Text("Sign Up"),
-                onPressed: () async {
-                  print("registerEmail :" + registerEmail);
 
-                  dynamic result =
-                      await AuthService().registerWithEmailAndPass();
+                onPressed: ()async {
+                  
+            
+            
+                 dynamic result = await AuthService().registerWithEmailAndPass(registerEmail,registerPassword);
 
-                  if (result == true)
-                    print("Registration Successful");
-                  else
-                    print("Registration Unsuccessful");
+                 if(result==true){
+                   print("Registration Successful");
+                   
+ 
                   Navigator.of(context).pop();
                   Navigator.of(context).pop();
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SignInPage()),
                   );
+
+              }
+                 
+                 else
+                 {
+                    print("Registration Unsuccessful");
+                   createDialogBox(context);
+                 }
+                
                 },
               ),
             )),

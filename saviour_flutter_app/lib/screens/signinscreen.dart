@@ -36,124 +36,181 @@ class _SignInPageState extends State<SignInPage> {
         title: Text("SignUp"),
         backgroundColor: Colors.redAccent[200],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0),
-              child: Form(
-                autovalidateMode: AutovalidateMode.always,
-                key: _formKey,
-                child: Column(
+
+     body:SingleChildScrollView(
+       
+
+       child: Container(
+        
+         child: Column(
+           
+           crossAxisAlignment: CrossAxisAlignment.center,
+           children: [
+             
+             Padding(
+               padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0),
+               child: Form(
+                 autovalidateMode: AutovalidateMode.always, key: _formKey,
+                 child: 
+               Column(
                   children: [
+                    
                     TextFormField(
                       decoration: InputDecoration(
-                          hintText: "Email",
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.only(right: 20, left: 20),
-                            child: Icon(
-                              Icons.account_circle,
-                            ),
+                        hintText: "Email",
+                  
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(right: 20, left: 20),
+                          child: Icon(
+                            Icons.account_circle,
+ 
                           ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0))),
-                      onChanged: (value) {
-                        email = value;
+                        ),
+                  
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))
+                        
+                      ),
+                     
+                      onChanged: (value){
+                        email=value;
+                       
+                        setState(() {
+                           errstring="";
+                        });
+                        
                       },
-                      validator: (value) {
-                        if (value!.isEmpty) return "Required";
-                        if (!value.endsWith("@gmail.com")) {
+                      validator: (value){
+                  
+                        if(value!.isEmpty)
+                        return "Required";
+                        if(!value.endsWith("@gmail.com"))
+                        {
                           return "not a vaild email";
+                  
                         }
+                        
+                  
                         return null;
+                  
+                  
                       },
+                    
                     ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    SizedBox(height: 20.0,),
                     TextFormField(
-                      decoration: InputDecoration(
-                        hintText: "Password",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.only(right: 20, left: 20),
                           child: Icon(
                             Icons.lock,
                           ),
                         ),
-                      ),
+                       
+                    ),
                       obscureText: true,
-                      onChanged: (value) {
-                        password = value;
+                      onChanged: (value){
+                        password=value;
+                         setState(() {
+                           errstring="";
+                        });
+                        
                       },
-                      validator: (value) {
-                        if (value!.isEmpty)
-                          return "Required";
+                  
+                      validator: (value){
+                        if(value!.isEmpty)
+                        return "Required";
+                  
                         else
-                          return null;
+                        return null;
                       },
+                      
                     ),
                     Row(
+                      
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: Text("Forgot password?"),
-                          style: ButtonStyle(
-                              foregroundColor:
-                                  MaterialStateProperty.all(Colors.red[300])),
-                        ),
+                        TextButton(onPressed: (){
+                  
+                        }, child:Text("Forgot password?"),
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all(Colors.red[300])
+                        ), ),
                       ],
                     ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate() == true) {
-                          dynamic check = await AuthService()
-                              .signInWithEmailAndPassword(
-                                  this.email, this.password);
-
-                          if (check == true) {
-                            Navigator.of(context).pop();
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return HomePage();
-                            }));
-                          } else {
-                            setState(() {
-                              errstring = 'Password is not matched';
-                            });
-                          }
-                        }
-                      },
-                      child: Text("Login"),
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.red)),
+                  
+                  
+                    ElevatedButton(onPressed: () async{
+                  
+                      if(_formKey.currentState!.validate()==true)
+                      {
+                         dynamic check =await AuthService().signInWithEmailAndPassword(this.email,this.password);
+                  
+                    if(check==true) 
+                    {
+                  
+                      Navigator.of(context).pop();
+                       Navigator.push(context, MaterialPageRoute(builder:(context){
+                        return HomePage();
+                      }));
+                  
+                    }
+                     
+                 else{
+                  
+                      setState(() {
+                            errstring='Password or email is incorrect';
+                         });
+                  
+                   }
+                  
+                  
+                      }
+                  
+                    
+                      
+                  
+                },
+                     child:Text("Login"),
+                  
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.red)
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Not have an account ?"),
-                        TextButton(
-                          child: Text("Register"),
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return RegisterScreen();
-                            }));
-                          },
-                        ),
-                      ],
-                    )
+                     
+                     ),
+                  
+                     Text(
+                       errstring,
+                       style: TextStyle(
+                         color: Colors.yellow[900]
+                       ),
+                     ),
+                  
+                     Row(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         Text("Not have an account ?"),
+                         TextButton(
+                           child: Text("Register"),
+                           onPressed: (){
+                             
+                             Navigator.push(context, MaterialPageRoute(builder: (context){
+                               return RegisterScreen();
+                  
+                             }));
+                           },
+                         ),
+                       ],
+                     )
                   ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+               ),
+               ),
+             ),
+           ],
+         ),
+       ),
+     ), 
     );
   }
 }

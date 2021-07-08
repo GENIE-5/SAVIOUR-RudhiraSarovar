@@ -6,7 +6,7 @@ class ApplicationBloc with ChangeNotifier {
   final geolocatorService = GeolocatorService();
 
   //variable
-  late Position currentLocation;
+   Position? currentLocation;
  // List<PlaceSearch> searchResults;
 
   ApplicationBloc() {

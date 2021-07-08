@@ -6,6 +6,7 @@ import 'package:saviour_flutter_app/blocs/application_bloc.dart';
 import 'package:saviour_flutter_app/screens/signinscreen.dart';
 //import 'package:provider/provider.dart';
 
+
 Future<void> main() async {
    WidgetsFlutterBinding.ensureInitialized();
    await Firebase.initializeApp();

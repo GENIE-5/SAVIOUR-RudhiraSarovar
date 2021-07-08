@@ -3,9 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:saviour_flutter_app/models/user.dart';
 
 
-
 class DataBaseManager {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CollectionReference developers =
+      FirebaseFirestore.instance.collection('developers');
 
+ 
 FirebaseFirestore firestore= FirebaseFirestore.instance;
 CollectionReference developers = FirebaseFirestore.instance.collection('developers');
 
@@ -25,13 +28,8 @@ Future getDataFromDB() async{
     print(element['name']+"-"+element['bloodgroup']);
 
   });
-  
   }
-  catch(err){
-print(err.toString());
-
-  }
-
+ 
 }
 
 
@@ -135,3 +133,4 @@ print(users[0].uid);
   }
 
 }
+ 

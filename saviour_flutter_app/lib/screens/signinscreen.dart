@@ -1,6 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:saviour_flutter_app/screens/authenticate.dart';
+ 
+import 'package:saviour_flutter_app/screens/forgotPasswordScreen.dart';
+//import 'package:provider/provider.dart';
+//import 'package:saviour_flutter_app/screens/databasemanagement.dart';
+ 
 import 'package:saviour_flutter_app/screens/home.dart';
 import 'package:saviour_flutter_app/screens/registration.dart';
 
@@ -106,7 +111,14 @@ class _SignInPageState extends State<SignInPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
-                            onPressed: () {},
+ 
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ForgetPasswordScreen();
+                              }));
+                            },
+ 
                             child: Text("Forgot password?"),
                             style: ButtonStyle(
                                 foregroundColor:
@@ -162,7 +174,9 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ),
               ),
-          ],
+ 
+            ],
+ 
           ),
         ),
       ),

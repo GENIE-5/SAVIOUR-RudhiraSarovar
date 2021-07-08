@@ -1,14 +1,12 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:saviour_flutter_app/models/user.dart';
 import 'package:saviour_flutter_app/screens/databasemanagement.dart';
 
 
 
-
-class AuthService{
-
+class AuthService {
 //Registeration of new user using email and password
+ 
 Future<bool> registerWithEmailAndPass(registerEmail,registerPassword,registerUsername,bloodGroup,pincode,age,mobileNumber) async{
 
   try {
@@ -41,41 +39,23 @@ FirebaseAuthException
     print('The account already exists for that email.');
     return false;
   }
-}
- catch (e) {
-  print(e);
-  return false;
-}
 
 
-return false;
-
-}
 
 //Login of a user using email and password
-Future<bool> signInWithEmailAndPassword(email,password) async{
+ 
+  Future<bool> signInWithEmailAndPassword(email, password) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
 
-try{
+      print(userCredential.user!.email);
 
-UserCredential userCredential=await FirebaseAuth.instance.signInWithEmailAndPassword(
-  email: email,
-   password: password ); 
-
-print(userCredential.user!.email);
-
-
-
-return true;
-
-}on FirebaseAuthException catch(e){
-  print(e.message);
-  return false;
+      return true;
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
+ 
 }
-
-}
-
-
-
-}
-
-

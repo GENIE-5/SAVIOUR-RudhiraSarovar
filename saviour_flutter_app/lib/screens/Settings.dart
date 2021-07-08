@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 //import 'package:custom_switch/custom_switch.dart';
 import 'package:saviour_flutter_app/screens/updateEmailScreen.dart';
 import 'package:saviour_flutter_app/screens/updatePassswordScreen.dart';
@@ -12,8 +15,41 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreen extends State<SettingsScreen> {
+  File? _pickedImage;
+  void _pickImageCamera() async {
+    final picker = ImagePicker();
+    final pickedImage =
+        await picker.getImage(source: ImageSource.camera, imageQuality: 20);
+    if (pickedImage != null) {
+      final pickedImageFile = File(pickedImage.path);
+
+      setState(() {
+        _pickedImage = pickedImageFile;
+      });
+    }
+  }
+
+  void _pickImageGallery() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.getImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      final pickedImageFile = File(pickedImage.path);
+      setState(() {
+        _pickedImage = pickedImageFile;
+      });
+    }
+    Navigator.pop(context);
+  }
+
+  void _remove() {
+    setState(() {
+      _pickedImage = null;
+    });
+    Navigator.pop(context);
+  }
+
   Widget build(BuildContext context) {
-   // var screenSize = MediaQuery.of(context).size;
+    // var screenSize = MediaQuery.of(context).size;
 
     //bool _switchNotificationsOff = false;
     return Scaffold(
@@ -42,17 +78,124 @@ class _SettingsScreen extends State<SettingsScreen> {
             Container(
               padding: EdgeInsets.all(10),
             ),
-            IconButton(
-              icon: Icon(Icons.account_circle),
-              color: Colors.red,
-              iconSize: 100,
-              onPressed: () {},
+            Stack(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                   child: CircleAvatar(
+                    radius: 71,
+                    backgroundColor: Colors.white,
+                    child: CircleAvatar(
+                      radius: 65,
+                       backgroundColor: Colors.blueAccent,
+                      backgroundImage:
+                          _pickedImage == null ? null : FileImage(_pickedImage!),
+                    ),
+                   ),
+                ),
+                Positioned(
+                    top: 120,
+                    left: 110,
+                    child: RawMaterialButton(
+                      elevation: 10,
+                      fillColor: Colors.red,
+                      child: Icon(Icons.add_a_photo),
+                      padding: EdgeInsets.all(15.0),
+                      shape: CircleBorder(),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  'Choose option',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    //color: ColorsConsts.gradiendLStart
+                                  ),
+                                ),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: [
+                                      InkWell(
+                                        onTap: _pickImageCamera,
+                                        splashColor: Colors.purpleAccent,
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Icon(
+                                                Icons.camera,
+                                                color: Colors.purpleAccent,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Camera',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500,
+                                                // color: ColorsConsts.title
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: _pickImageGallery,
+                                        splashColor: Colors.purpleAccent,
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Icon(
+                                                Icons.image,
+                                                color: Colors.purpleAccent,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Gallery',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: _remove,
+                                        splashColor: Colors.purpleAccent,
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Icon(
+                                                Icons.remove_circle,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Remove',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.red),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+                      },
+                    ))
+              ],
             ),
-            Text("Change profile picture",
-                style: new TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
-                )),
             SizedBox(
               height: 10,
             ),
@@ -166,9 +309,9 @@ class _SettingsScreen extends State<SettingsScreen> {
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: ElevatedButton(
                   child: Text('Save changes'),
-                   style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.red)),
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.red)),
                   onPressed: () {},
                 )),
           ],

@@ -6,8 +6,10 @@ class ApplicationBloc with ChangeNotifier {
   final geolocatorService = GeolocatorService();
 
   //variable
-   Position? currentLocation;
- // List<PlaceSearch> searchResults;
+ 
+  Position? currentLocation;
+  // List<PlaceSearch> searchResults;
+ 
 
   ApplicationBloc() {
     setCurrentLocation();
@@ -21,5 +23,5 @@ class ApplicationBloc with ChangeNotifier {
   //   searchResults = await placesService.getAutocomplete(searchTerm);
   //   notifyListeners();
   // }
-  
+
 }

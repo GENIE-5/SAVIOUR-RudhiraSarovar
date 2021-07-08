@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saviour_flutter_app/screens/Settings.dart';
 import 'package:saviour_flutter_app/screens/about.dart';
+import 'package:saviour_flutter_app/screens/requestScreen.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -46,6 +47,15 @@ class _NavigationPageState extends State<NavigationPage> {
         Divider(
           color: Colors.black,
           height: 2.0,
+        ),
+         ListTile(
+          title: Text("request"),
+          onTap: () {
+            Navigator.of(context).pop();
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return RequestScreen();
+            }));
+          },
         ),
         ListTile(
           title: Text("Settings"),

@@ -1,67 +1,46 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-class AuthService{
-
+class AuthService {
 //Registeration of new user using email and password
-Future<bool> registerWithEmailAndPass(registerEmail,registerPassword) async{
+  Future<bool> registerWithEmailAndPass(registerEmail, registerPassword) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: registerEmail, password: registerPassword);
 
-  try {
-  UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: registerEmail,
-    password: registerPassword
-  );
+      print(userCredential);
 
-  print(userCredential);
-return true;
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+        return false;
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
 
-} on 
-FirebaseAuthException
- catch (e)
- {
-  if (e.code == 'weak-password') {
-    print('The password provided is too weak.');
     return false;
   }
-   else if (e.code == 'email-already-in-use') {
-    print('The account already exists for that email.');
-    return false;
-  }
-}
- catch (e) {
-  print(e);
-  return false;
-}
 
 
-return false;
-
-}
 
 //Login of a user using email and password
-Future<bool> signInWithEmailAndPassword(email,password) async{
+  Future<bool> signInWithEmailAndPassword(email, password) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
 
-try{
+      print(userCredential.user!.email);
 
-UserCredential userCredential=await FirebaseAuth.instance.signInWithEmailAndPassword(
-  email: email,
-   password: password ); 
-
-print(userCredential.user!.email);
-
-
-return true;
-
-}on FirebaseAuthException catch(e){
-  print(e.message);
-  return false;
+      return true;
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
 }
-
-}
-
-
-
-}
-
-

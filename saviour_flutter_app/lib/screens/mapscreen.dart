@@ -25,12 +25,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         title: Text("Maps"),
         backgroundColor: Colors.redAccent[200],
       ),
-      body:(applicationBloc.currentLocation ==null)?
+      body:(applicationBloc.currentLocation==null)?
            Center(child:CircularProgressIndicator())
           : GoogleMap(
           onMapCreated: onMapCreated,
           initialCameraPosition: CameraPosition(
-            target: LatLng(applicationBloc.currentLocation.latitude, applicationBloc.currentLocation.longitude),
+            target: LatLng(applicationBloc.currentLocation!.latitude, applicationBloc.currentLocation!.longitude),
             zoom: 40,
           ),
             // markers: Set<Marker>.of(applicationBloc.markers),

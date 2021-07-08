@@ -24,6 +24,7 @@ class _Register1ScreenState extends State<Register1Screen> {
 String registerEmail='';
 String registerPassword='';
 String registerUsername="";
+int age=25;
 
 _Register1ScreenState(this.registerUsername,this.registerEmail,this.registerPassword);
   @override
@@ -42,11 +43,12 @@ _Register1ScreenState(this.registerUsername,this.registerEmail,this.registerPass
 
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
+    String pincode ="";
 
  createDialogBox(BuildContext context){
 return showDialog(context: context, builder:(context){
   return AlertDialog(
-    title: Text("email is already registered"),
+    title: Text("email is already registered or email is incorrect"),
     actions: [
       ElevatedButton(
         onPressed: 
@@ -190,10 +192,28 @@ return showDialog(context: context, builder:(context){
                     },
                     value: bloodGroupSelected,
                   ),
+
+                  Container(
+                    width: deviceWidth,
+                    margin:EdgeInsets.only(
+                      left: deviceWidth * 0.3,
+                     bottom: deviceHeight * 0.03
+                     ) ,
+                     child:TextFormField(
+                       decoration: InputDecoration(
+                         hintText: "pincode"
+                       ),
+                       onChanged: (value){
+                         pincode=value;
+                       },
+                     )
+
+                  ),
                   
                   //SignUp Button
                   
                   Container(
+
                       padding: EdgeInsets.only(top: 25),
                       child: Container(
               width: deviceWidth * 0.4,
@@ -201,9 +221,9 @@ return showDialog(context: context, builder:(context){
                 child: Text("Sign Up"),
                 onPressed: ()async {
                   
+        
             
-            
-                 dynamic result = await AuthService().registerWithEmailAndPass(registerEmail,registerPassword);
+                 dynamic result = await AuthService().registerWithEmailAndPass(registerEmail,registerPassword,registerUsername,bloodGroupSelected,pincode,age,phoneNumberController.text);
 
                  if(result==true){
                    print("Registration Successful");

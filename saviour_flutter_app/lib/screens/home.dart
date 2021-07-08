@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:saviour_flutter_app/screens/Settings.dart';
 import 'package:saviour_flutter_app/screens/about.dart';
+import 'package:saviour_flutter_app/screens/databasemanagement.dart';
 import 'package:saviour_flutter_app/screens/mapscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:saviour_flutter_app/screens/signinscreen.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
@@ -13,6 +15,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+dynamic userData;
+@override
+  void initState(){
+
+    super.initState();
+    getData();
+  
+
+  }
+  void getData()async{
+
+
+
+  }
+
+  String? username(){
+    if(FirebaseAuth.instance.currentUser==null)
+    return "no display";
+    return FirebaseAuth.instance.currentUser!.displayName;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +66,8 @@ class _HomePageState extends State<HomePage> {
             Column(
               children: [
                 UserAccountsDrawerHeader(
-                  accountName:Text("Vinay Kohli"), 
-                accountEmail:Text("vinaykohli@gmail.com"),
+                  accountName:Text("username"), 
+                accountEmail:Text("email"),
                 currentAccountPicture:CircleAvatar(
                   backgroundImage: NetworkImage('https://i.pinimg.com/474x/5b/ba/76/5bba763062eedbb628779215a24848b1.jpg'),
                   backgroundColor: Colors.redAccent[200],
@@ -75,6 +99,16 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(context, MaterialPageRoute(builder: (context){
                           return SettingsPage();
                         }));
+              },
+            ),
+             Divider(
+              color: Colors.black,
+              height: 2.0,
+            ),
+            ListTile(
+              title: Text("Request"),
+              onTap: (){
+                RequestHandler().getDonorsDataFromPincode(pincode: "505462");
               },
             ),
             
@@ -146,6 +180,7 @@ class _CardsState extends State<Cards> {
               ),
              ElevatedButton(
                onPressed: (){
+                 DataBaseManager().getDataFromDB();
                  Navigator.push(context, MaterialPageRoute(builder: (context){
                    return GoogleMapScreen();
                  }));

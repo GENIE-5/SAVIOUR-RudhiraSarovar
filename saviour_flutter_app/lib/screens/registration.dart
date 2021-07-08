@@ -185,12 +185,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: ElevatedButton(
                   child: Text("Continue"),
                   onPressed: () {
-
                     if(_registrationKey.currentState!.validate())
                     {
-                      print("email in frst registration :"+email.text);
-                     // AuthService as=AuthService();
-                     // as.setRegisterprocess(email.text,userNameController.text,passwordController.text);
+                     
                       
                     Navigator.push(
                       context,

@@ -1,11 +1,14 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:saviour_flutter_app/screens/databasemanagement.dart';
+import 'package:saviour_flutter_app/screens/models/user.dart';
+
 
 
 class AuthService{
 
 //Registeration of new user using email and password
-Future<bool> registerWithEmailAndPass(registerEmail,registerPassword) async{
+Future<bool> registerWithEmailAndPass(registerEmail,registerPassword,registerUsername,bloodGroup,pincode,age,mobileNumber) async{
 
   try {
   UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -13,7 +16,16 @@ Future<bool> registerWithEmailAndPass(registerEmail,registerPassword) async{
     password: registerPassword
   );
 
+ await userCredential.user!.updateDisplayName(registerUsername);
+
   print(userCredential);
+
+
+OurUser currentUserData=OurUser(uid: userCredential.user!.uid , username: registerUsername, age: age, phoneNumber:mobileNumber, pincode: pincode,profilePicUrl: "");
+
+DataBaseManager().insertDataIntoDatabase(currentUserData);
+DataBaseManager().insertData(uid:userCredential.user!.uid ,pincode: pincode );
+
 return true;
 
 } on 
@@ -49,6 +61,7 @@ UserCredential userCredential=await FirebaseAuth.instance.signInWithEmailAndPass
    password: password ); 
 
 print(userCredential.user!.email);
+
 
 
 return true;

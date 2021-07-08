@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:saviour_flutter_app/screens/models/user.dart';
-//import 'package:saviour_flutter_app/screens/models/developermodel.dart';
+import 'package:saviour_flutter_app/models/user.dart';
 
-//import 'package:firebase_core/firebase_core.dart';
 
 
 class DataBaseManager {

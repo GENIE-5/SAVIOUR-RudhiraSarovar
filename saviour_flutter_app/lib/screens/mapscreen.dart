@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:saviour_flutter_app/blocs/application_bloc.dart';
 
 class GoogleMapScreen extends StatefulWidget {
-  const GoogleMapScreen({ Key? key }) : super(key: key);
+  const GoogleMapScreen({Key? key}) : super(key: key);
 
   @override
   _GoogleMapScreenState createState() => _GoogleMapScreenState();
@@ -16,8 +17,6 @@ late GoogleMapController mapController;
 void onMapCreated(GoogleMapController controller){
 
   mapController=controller;
-  
-
 }
 @override
 void initState(){
@@ -54,10 +53,11 @@ List<Marker> allMarkers =[];
 
   @override
   Widget build(BuildContext context) {
+    final applicationBloc = Provider.of<ApplicationBloc>(context);
+    
     return Scaffold(
-
       appBar: AppBar(
-        title:Text("Maps") ,
+        title: Text("Maps"),
         backgroundColor: Colors.redAccent[200],
         actions: [
           IconButton(onPressed: () async{
@@ -66,20 +66,17 @@ List<Marker> allMarkers =[];
           )
         ],
       ),
-
-      body: GoogleMap(
-        onMapCreated: onMapCreated,
-        initialCameraPosition:CameraPosition(
-          target: LatLng(
-           18.8208099,78.7134866 
-        ),
-        zoom: 15,
-        
-      ),
-      markers: Set.from(allMarkers),
-      
-       ),
-      
+      body:(applicationBloc.currentLocation==null)?
+           Center(child:CircularProgressIndicator())
+          : GoogleMap(
+          onMapCreated: onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: LatLng(applicationBloc.currentLocation!.latitude, applicationBloc.currentLocation!.longitude),
+            zoom: 40,
+          ),
+            // markers: Set<Marker>.of(applicationBloc.markers),
+            markers: Set.from(allMarkers),
+          ),
     );
   }
 }

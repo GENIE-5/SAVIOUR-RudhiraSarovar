@@ -1,7 +1,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:saviour_flutter_app/models/user.dart';
 import 'package:saviour_flutter_app/screens/databasemanagement.dart';
-import 'package:saviour_flutter_app/screens/models/user.dart';
+
 
 
 

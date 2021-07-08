@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:saviour_flutter_app/screens/navigationScreen.dart';
 import 'package:saviour_flutter_app/screens/signinscreen.dart';
 
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -12,6 +13,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+dynamic userData;
+@override
+  void initState(){
+
+    super.initState();
+    getData();
+  
+
+  }
+  void getData()async{
+
+
+
+  }
+
+  String? username(){
+    if(FirebaseAuth.instance.currentUser==null)
+    return "no display";
+    return FirebaseAuth.instance.currentUser!.displayName;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

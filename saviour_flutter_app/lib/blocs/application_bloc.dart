@@ -6,8 +6,10 @@ class ApplicationBloc with ChangeNotifier {
   final geolocatorService = GeolocatorService();
 
   //variable
+ 
   Position? currentLocation;
   // List<PlaceSearch> searchResults;
+ 
 
   ApplicationBloc() {
     setCurrentLocation();

@@ -1,11 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:saviour_flutter_app/screens/Settings.dart';
 import 'package:saviour_flutter_app/screens/about.dart';
- 
+
 import 'package:saviour_flutter_app/screens/requestScreen.dart';
- 
+
 import 'package:saviour_flutter_app/screens/databasemanagement.dart';
- 
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -22,6 +22,14 @@ class _NavigationPageState extends State<NavigationPage> {
     );
   }
 
+  dynamic user;
+  @override
+  void initState() {
+    super.initState();
+    user = FirebaseAuth.instance.currentUser;
+    print(user);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -29,11 +37,11 @@ class _NavigationPageState extends State<NavigationPage> {
         Column(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text("Vinay Kohli"),
-              accountEmail: Text("vinaykohli@gmail.com"),
+              accountName: Text(user.displayName),
+              accountEmail: Text(user.email),
               currentAccountPicture: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    'https://i.pinimg.com/474x/5b/ba/76/5bba763062eedbb628779215a24848b1.jpg'),
+                 backgroundImage: NetworkImage(
+                    user.photoURL==null?"https://tse2.mm.bing.net/th?id=OIP._3QPMJ7E-_rbllGOe7OeLgHaHa&pid=Api&P=0&w=300&h=300":user.photoURL),
                 backgroundColor: Colors.redAccent[200],
               ),
             ),
@@ -52,7 +60,7 @@ class _NavigationPageState extends State<NavigationPage> {
           color: Colors.black,
           height: 2.0,
         ),
-         ListTile(
+        ListTile(
           title: Text("request"),
           onTap: () {
             Navigator.of(context).pop();
@@ -69,17 +77,16 @@ class _NavigationPageState extends State<NavigationPage> {
             }));
           },
         ),
-        
-             Divider(
-              color: Colors.black,
-              height: 2.0,
-            ),
-            ListTile(
-              title: Text("Request"),
-              onTap: (){
-                RequestHandler().getDonorsDataFromPincode(pincode: "505462");
-              },
-            ),
+        Divider(
+          color: Colors.black,
+          height: 2.0,
+        ),
+        ListTile(
+          title: Text("Request"),
+          onTap: () {
+            RequestHandler().getDonorsDataFromPincode(pincode: "505462");
+          },
+        ),
       ],
     );
   }

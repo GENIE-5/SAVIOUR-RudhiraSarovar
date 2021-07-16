@@ -9,11 +9,13 @@ class RequestScreen extends StatefulWidget {
 
 class _RequestScreenState extends State<RequestScreen> {
   var bloodGroupSelected = 'A+';
+  TextEditingController nameController = TextEditingController();
   TextEditingController phoneCodeController = TextEditingController();
+  TextEditingController bloodType = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController hospitalController = TextEditingController();
   TextEditingController pincodeController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   var selectedRadio;
   @override
   void initState() {
@@ -38,17 +40,18 @@ class _RequestScreenState extends State<RequestScreen> {
         backgroundColor: Colors.redAccent[200],
       ),
       body: SingleChildScrollView(
-              child: Container(
+        child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0),
                 child: Form(
+                  autovalidateMode: AutovalidateMode.always,
+                  key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
-                   
                     children: [
                       TextFormField(
                         decoration: InputDecoration(
@@ -67,8 +70,8 @@ class _RequestScreenState extends State<RequestScreen> {
                       ),
                       Text(
                         'Phone Numner',
-                        style:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 10,
@@ -152,8 +155,8 @@ class _RequestScreenState extends State<RequestScreen> {
                       ),
                       Text(
                         'Type',
-                        style:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Row(
                         children: [

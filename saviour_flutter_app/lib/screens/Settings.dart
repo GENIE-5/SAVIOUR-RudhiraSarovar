@@ -1,21 +1,46 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:saviour_flutter_app/screens/databasemanagement.dart';
 //import 'package:custom_switch/custom_switch.dart';
 import 'package:saviour_flutter_app/screens/updateEmailScreen.dart';
 import 'package:saviour_flutter_app/screens/updatePassswordScreen.dart';
 import 'package:saviour_flutter_app/screens/updateUsernameScreen.dart';
 import 'package:saviour_flutter_app/screens/updateNumberScreen.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
   _SettingsScreen createState() => new _SettingsScreen();
 }
 
+ 
+
 class _SettingsScreen extends State<SettingsScreen> {
+  String? url;
+  dynamic user = "User";
+   @override
+  void initState() {
+    super.initState();
+    user = FirebaseAuth.instance.currentUser;
+  }
+
   File? _pickedImage;
+  DataBaseManager db = new DataBaseManager();
+  void imageToStorage() async {
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child('userImages')
+        .child(user.displayName + '.jpg');
+    await ref.putFile(_pickedImage!);
+    url = await ref.getDownloadURL();
+    user.updatePhotoURL(url);
+    db.profilePicUpdate(url);
+  }
+
   void _pickImageCamera() async {
     final picker = ImagePicker();
     final pickedImage =
@@ -27,8 +52,10 @@ class _SettingsScreen extends State<SettingsScreen> {
         _pickedImage = pickedImageFile;
       });
     }
+    imageToStorage();
   }
 
+   
   void _pickImageGallery() async {
     final picker = ImagePicker();
     final pickedImage = await picker.getImage(source: ImageSource.gallery);
@@ -38,12 +65,14 @@ class _SettingsScreen extends State<SettingsScreen> {
         _pickedImage = pickedImageFile;
       });
     }
+    imageToStorage();
     Navigator.pop(context);
   }
 
   void _remove() {
     setState(() {
-      _pickedImage = null;
+      //_pickedImage = null;
+      user.updatePhotoURL("https://tse2.mm.bing.net/th?id=OIP._3QPMJ7E-_rbllGOe7OeLgHaHa&pid=Api&P=0&w=300&h=300");
     });
     Navigator.pop(context);
   }
@@ -82,16 +111,16 @@ class _SettingsScreen extends State<SettingsScreen> {
               children: [
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-                   child: CircleAvatar(
+                  child: CircleAvatar(
                     radius: 71,
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
                       radius: 65,
-                       backgroundColor: Colors.blueAccent,
-                      backgroundImage:
-                          _pickedImage == null ? null : FileImage(_pickedImage!),
+                      backgroundColor: Colors.blueAccent,
+                      backgroundImage: NetworkImage(
+                    user.photoURL==null?"https://tse2.mm.bing.net/th?id=OIP._3QPMJ7E-_rbllGOe7OeLgHaHa&pid=Api&P=0&w=300&h=300":user.photoURL),
                     ),
-                   ),
+                  ),
                 ),
                 Positioned(
                     top: 120,

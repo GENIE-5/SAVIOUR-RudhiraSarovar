@@ -32,7 +32,7 @@ class _UpdateEmailScreen extends State<UpdateEmailScreen> {
             child: new Column(children: <Widget>[
               new TextFormField(
                 decoration: new InputDecoration(
-                  labelText: "old email id",
+                  labelText: "Old Email Id",
                   labelStyle: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
@@ -52,7 +52,7 @@ class _UpdateEmailScreen extends State<UpdateEmailScreen> {
               ),
               new TextFormField(
                 decoration: new InputDecoration(
-                  labelText: "new email id",
+                  labelText: "New Email Id",
                   labelStyle: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
@@ -86,14 +86,14 @@ class _UpdateEmailScreen extends State<UpdateEmailScreen> {
                           Alert(
                             context: context,
                             title: 'Error',
-                            desc: "your email didn't match",
+                            desc: "Email didn't match",
                           ).show();
                         } else {
                           db.UpdateAuthField(emailController.text);
                           Alert(
                             context: context,
                             title: 'Success',
-                            desc: "your email chnaged successfully",
+                            desc: "Email changed successfully",
                           ).show();
                         }
                       }

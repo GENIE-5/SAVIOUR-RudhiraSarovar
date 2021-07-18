@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:saviour_flutter_app/screens/authenticate.dart';
- 
+
 import 'package:saviour_flutter_app/screens/forgotPasswordScreen.dart';
 //import 'package:provider/provider.dart';
 //import 'package:saviour_flutter_app/screens/databasemanagement.dart';
- 
+
 import 'package:saviour_flutter_app/screens/home.dart';
 import 'package:saviour_flutter_app/screens/registration.dart';
 
@@ -34,10 +34,6 @@ class _SignInPageState extends State<SignInPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text("SignUp"),
-        backgroundColor: Colors.redAccent[200],
-      ),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
@@ -50,6 +46,19 @@ class _SignInPageState extends State<SignInPage> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 150.0,
+                      ),
+                      Text(
+                        'SAVIOUR',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.redAccent,
+                            fontSize: 40),
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
                       TextFormField(
                         decoration: InputDecoration(
                             hintText: "Email",
@@ -79,7 +88,7 @@ class _SignInPageState extends State<SignInPage> {
                         },
                       ),
                       SizedBox(
-                        height: 20.0,
+                        height: 30.0,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
@@ -111,14 +120,12 @@ class _SignInPageState extends State<SignInPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
- 
                             onPressed: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return ForgetPasswordScreen();
                               }));
                             },
- 
                             child: Text("Forgot password?"),
                             style: ButtonStyle(
                                 foregroundColor:
@@ -174,9 +181,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ),
               ),
- 
             ],
- 
           ),
         ),
       ),

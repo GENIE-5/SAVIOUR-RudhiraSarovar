@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saviour_flutter_app/screens/home.dart';
 
 class RequestScreen extends StatefulWidget {
   const RequestScreen({Key? key}) : super(key: key);
@@ -36,6 +37,14 @@ class _RequestScreenState extends State<RequestScreen> {
     final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return HomePage();
+            }));
+          },
+        ),
         title: Text("Request Blood"),
         backgroundColor: Colors.redAccent[200],
       ),
@@ -168,7 +177,7 @@ class _RequestScreenState extends State<RequestScreen> {
                               setSelectedRadio(val);
                             },
                           ),
-                          Text('blood'),
+                          Text('Blood'),
                           SizedBox(
                             width: 30.0,
                           ),
@@ -180,7 +189,7 @@ class _RequestScreenState extends State<RequestScreen> {
                               setSelectedRadio(val);
                             },
                           ),
-                          Text('platlets'),
+                          Text('Platlets'),
                         ],
                       ),
                       SizedBox(

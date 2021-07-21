@@ -188,7 +188,7 @@ class RequestHandler {
     if (users.length == 0) {
       print("users are not there in this pincode");
     } else {
-      print(users[0].uid);
+      print(users);
     }
   }
 }

@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
-import 'package:saviour_flutter_app/screens/home.dart';
+import 'package:saviour_flutter_app/screens/donorsListScreen.dart';
+import 'package:saviour_flutter_app/screens/home.dart'
 
 class RequestScreen extends StatefulWidget {
   const RequestScreen({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class _RequestScreenState extends State<RequestScreen> {
   TextEditingController pincodeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var selectedRadio;
+  
   @override
   void initState() {
     super.initState();
@@ -257,6 +260,22 @@ class _RequestScreenState extends State<RequestScreen> {
                         ),
                         controller: pincodeController,
                       ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => donorsList(
+                                          pincode: pincodeController.text,
+                                        )),
+                              );
+                            }
+                          },
+                          child: Text('Request'))
                     ],
                   ),
                 ),

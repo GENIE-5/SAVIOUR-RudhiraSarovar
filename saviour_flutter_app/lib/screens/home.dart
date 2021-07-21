@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:saviour_flutter_app/screens/mapscreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:saviour_flutter_app/screens/navigationScreen.dart';
-import 'package:saviour_flutter_app/screens/signinscreen.dart';
+// ignore: import_of_legacy_library_into_null_safe
 
+import 'package:saviour_flutter_app/screens/cards.dart';
+import 'package:saviour_flutter_app/screens/DonorRequest.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,116 +13,95 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-dynamic userData;
-@override
-  void initState(){
-
+  int pageIndex = 0;
+  List<Widget> pages = [
+    CardsScreen(),
+    GoogleMapScreen(),
+    DonorRequestScreen(),
+  ];
+  @override
+  void initState() {
+    // TODO: implement initState
     super.initState();
-    getData();
-  
-
-  }
-  void getData()async{
-
-
-
   }
 
-  String? username(){
-    if(FirebaseAuth.instance.currentUser==null)
-    return "no display";
-    return FirebaseAuth.instance.currentUser!.displayName;
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-        backgroundColor: Colors.redAccent[200],
-        iconTheme: IconThemeData(opacity: 3.0),
-        actions: [
-          IconButton(
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut();
-                Navigator.of(context).pop();
-
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return SignInPage();
-                }));
-              },
-              icon: Icon(Icons.person))
-        ],
-      ),
-      drawer: Drawer(
-        child: NavigationPage()
-      ),
-      body: Homebody(),
+      body: getBody(),
+      bottomNavigationBar: getFooter(),
     );
   }
-}
 
-class Homebody extends StatefulWidget {
-  const Homebody({Key? key}) : super(key: key);
-
-  @override
-  _HomebodyState createState() => _HomebodyState();
-}
-
-class _HomebodyState extends State<Homebody> {
-  @override
-  Widget build(BuildContext context) {
-    return GridView.count(crossAxisCount: 1, children: [
-      Cards(),
-      Cards(),
-      Cards(),
-      Cards(),
-      Cards(),
-      Cards(),
-      Cards(),
-      Cards(),
-    ]);
+  Widget getBody() {
+    // return pages.elementAt(pageIndex);
+    return IndexedStack(
+      index: pageIndex,
+      children: pages,
+    );
   }
-}
 
-class Cards extends StatefulWidget {
-  const Cards({Key? key}) : super(key: key);
-
-  @override
-  _CardsState createState() => _CardsState();
-}
-
-class _CardsState extends State<Cards> {
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
-        elevation: 10.0,
-        color: Colors.redAccent[200],
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Want some Help? Let's try",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return GoogleMapScreen();
-                  }));
+  Widget getFooter() {
+    List iconItems = [Icons.person, Icons.map, Icons.menu];
+    List textItems = ["Our Connection", "Map", "Request List"];
+    List colorItems = [
+      Colors.red,
+      Colors.red,
+      Colors.red,
+    ];
+    return Container(
+      width: double.infinity,
+      height: 90,
+      decoration: BoxDecoration(
+          color: Colors.black,
+          border: Border(
+              top:
+                  BorderSide(width: 2, color: Colors.black.withOpacity(0.06)))),
+      child: Padding(
+        padding:
+            const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List.generate(textItems.length, (index) {
+            return InkWell(
+                onTap: () {
+                  selectedTab(index);
                 },
-                child: Text("Click here to get help"),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.deepOrangeAccent[100],
-                ),
-              )
-            ],
-          ),
-        ));
+                child: Column(
+                  children: [
+                    Icon(iconItems[index],
+                        color: pageIndex == index
+                            ? colorItems[index]
+                            : Colors.white.withOpacity(0.5)),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      textItems[index],
+                      style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w500,
+                          color: pageIndex == index
+                              ? Colors.white
+                              : Colors.white.withOpacity(0.5)),
+                    )
+                  ],
+                ));
+          }),
+        ),
+      ),
+    );
+  }
+
+  selectedTab(index) {
+    setState(() {
+      pageIndex = index;
+    });
   }
 }

@@ -40,8 +40,9 @@ class _NavigationPageState extends State<NavigationPage> {
               accountName: Text(user.displayName),
               accountEmail: Text(user.email),
               currentAccountPicture: CircleAvatar(
-                 backgroundImage: NetworkImage(
-                    user.photoURL==null?"https://tse2.mm.bing.net/th?id=OIP._3QPMJ7E-_rbllGOe7OeLgHaHa&pid=Api&P=0&w=300&h=300":user.photoURL),
+                backgroundImage: NetworkImage(user.photoURL == null
+                    ? "https://tse2.mm.bing.net/th?id=OIP._3QPMJ7E-_rbllGOe7OeLgHaHa&pid=Api&P=0&w=300&h=300"
+                    : user.photoURL),
                 backgroundColor: Colors.redAccent[200],
               ),
             ),
@@ -59,15 +60,6 @@ class _NavigationPageState extends State<NavigationPage> {
         Divider(
           color: Colors.black,
           height: 2.0,
-        ),
-        ListTile(
-          title: Text("request"),
-          onTap: () {
-            Navigator.of(context).pop();
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return RequestScreen();
-            }));
-          },
         ),
         ListTile(
           title: Text("Settings"),

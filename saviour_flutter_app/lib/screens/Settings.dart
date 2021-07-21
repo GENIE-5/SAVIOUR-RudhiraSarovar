@@ -17,12 +17,10 @@ class SettingsScreen extends StatefulWidget {
   _SettingsScreen createState() => new _SettingsScreen();
 }
 
- 
-
 class _SettingsScreen extends State<SettingsScreen> {
   String? url;
   dynamic user = "User";
-   @override
+  @override
   void initState() {
     super.initState();
     user = FirebaseAuth.instance.currentUser;
@@ -55,7 +53,6 @@ class _SettingsScreen extends State<SettingsScreen> {
     imageToStorage();
   }
 
-   
   void _pickImageGallery() async {
     final picker = ImagePicker();
     final pickedImage = await picker.getImage(source: ImageSource.gallery);
@@ -72,7 +69,8 @@ class _SettingsScreen extends State<SettingsScreen> {
   void _remove() {
     setState(() {
       //_pickedImage = null;
-      user.updatePhotoURL("https://tse2.mm.bing.net/th?id=OIP._3QPMJ7E-_rbllGOe7OeLgHaHa&pid=Api&P=0&w=300&h=300");
+      user.updatePhotoURL(
+          "https://tse2.mm.bing.net/th?id=OIP._3QPMJ7E-_rbllGOe7OeLgHaHa&pid=Api&P=0&w=300&h=300");
     });
     Navigator.pop(context);
   }
@@ -117,8 +115,9 @@ class _SettingsScreen extends State<SettingsScreen> {
                     child: CircleAvatar(
                       radius: 65,
                       backgroundColor: Colors.blueAccent,
-                      backgroundImage: NetworkImage(
-                    user.photoURL==null?"https://tse2.mm.bing.net/th?id=OIP._3QPMJ7E-_rbllGOe7OeLgHaHa&pid=Api&P=0&w=300&h=300":user.photoURL),
+                      backgroundImage: NetworkImage(user.photoURL == null
+                          ? "https://tse2.mm.bing.net/th?id=OIP._3QPMJ7E-_rbllGOe7OeLgHaHa&pid=Api&P=0&w=300&h=300"
+                          : user.photoURL),
                     ),
                   ),
                 ),
@@ -232,11 +231,11 @@ class _SettingsScreen extends State<SettingsScreen> {
               leading: Icon(
                 Icons.account_box,
                 color: Colors.white,
-                size: 40,
+                size: 30,
               ),
               title: Text("Edit username",
                   style: new TextStyle(
-                    fontSize: 20.0,
+                    fontSize: 15.0,
                     color: Colors.white,
                   )),
               onTap: () {
@@ -277,11 +276,11 @@ class _SettingsScreen extends State<SettingsScreen> {
               leading: Icon(
                 Icons.lock_outline,
                 color: Colors.white,
-                size: 40,
+                size: 30,
               ),
               title: Text("Change Password",
                   style: new TextStyle(
-                    fontSize: 20.0,
+                    fontSize: 15.0,
                     color: Colors.white,
                   )),
               onTap: () {
@@ -297,11 +296,11 @@ class _SettingsScreen extends State<SettingsScreen> {
               leading: Icon(
                 Icons.mail_outline,
                 color: Colors.white,
-                size: 40,
+                size: 30,
               ),
               title: Text("Change Mail ID",
                   style: new TextStyle(
-                    fontSize: 20.0,
+                    fontSize: 15.0,
                     color: Colors.white,
                   )),
               onTap: () {
@@ -317,11 +316,11 @@ class _SettingsScreen extends State<SettingsScreen> {
               leading: Icon(
                 Icons.call,
                 color: Colors.white,
-                size: 40,
+                size: 30,
               ),
               title: Text("Change Phone Number",
                   style: new TextStyle(
-                    fontSize: 20.0,
+                    fontSize: 15.0,
                     color: Colors.white,
                   )),
               onTap: () {

@@ -32,7 +32,7 @@ class _UpdateUsernameScreen extends State<UpdateUsernameScreen> {
             child: new Column(children: <Widget>[
               new TextFormField(
                 decoration: new InputDecoration(
-                  labelText: "give your new user name here",
+                  labelText: "New UserName",
                   labelStyle: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
@@ -47,6 +47,7 @@ class _UpdateUsernameScreen extends State<UpdateUsernameScreen> {
                   return null;
                 },
               ),
+              SizedBox(height: 20),
               Container(
                   height: 50,
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -66,7 +67,7 @@ class _UpdateUsernameScreen extends State<UpdateUsernameScreen> {
                         Alert(
                           context: context,
                           title: 'Success',
-                          desc: "your password chnaged successfully",
+                          desc: "Username update successful",
                         ).show();
                       }
                     },

@@ -32,7 +32,7 @@ class _UpdatePasswordScreen extends State<UpdatePasswordScreen> {
             child: new Column(children: <Widget>[
               new TextFormField(
                 decoration: new InputDecoration(
-                  labelText: "old password",
+                  labelText: "Old password",
                   labelStyle: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
@@ -52,7 +52,7 @@ class _UpdatePasswordScreen extends State<UpdatePasswordScreen> {
               ),
               new TextFormField(
                 decoration: new InputDecoration(
-                  labelText: "new password",
+                  labelText: "New password",
                   labelStyle: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
@@ -82,7 +82,7 @@ class _UpdatePasswordScreen extends State<UpdatePasswordScreen> {
                               MaterialStateProperty.all<Color>(Colors.red)),
                       onPressed: () {
                         // if (_formKey.currentState!.validate() == true) {
-                        //     //  if (db.getAuthUser().password != passwordController.text)  
+                        //     //  if (db.getAuthUser().password != passwordController.text)
                         //     //{
                         //     Alert(
                         //       context: context,

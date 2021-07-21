@@ -34,7 +34,7 @@ class _UpdateNumberScreen extends State<UpdateNumberScreen> {
             child: new Column(children: <Widget>[
               new TextFormField(
                 decoration: new InputDecoration(
-                  labelText: "old number",
+                  labelText: "Old Number",
                   labelStyle: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
@@ -54,7 +54,7 @@ class _UpdateNumberScreen extends State<UpdateNumberScreen> {
               ),
               new TextFormField(
                 decoration: new InputDecoration(
-                  labelText: "new number",
+                  labelText: "New Number",
                   labelStyle: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
@@ -83,7 +83,7 @@ class _UpdateNumberScreen extends State<UpdateNumberScreen> {
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.red)),
                     onPressed: () {
-                      print("my:"+ oldPhoneNumController.text);
+                      print("my:" + oldPhoneNumController.text);
                       if (_formKey.currentState!.validate() == true) {
                         if (db.getData("phoneNumber") !=
                             oldPhoneNumController.text) {

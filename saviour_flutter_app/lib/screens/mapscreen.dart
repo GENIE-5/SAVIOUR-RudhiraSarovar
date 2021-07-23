@@ -15,6 +15,7 @@ class GoogleMapScreen extends StatefulWidget {
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
   late GoogleMapController mapController;
+
   void onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
@@ -47,11 +48,16 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   @override
   Widget build(BuildContext context) {
     final applicationBloc = Provider.of<ApplicationBloc>(context);
+    allMarkers.add(Marker(
+      markerId: MarkerId("korutla"),
+      position: LatLng(applicationBloc.currentLocation!.latitude,
+          applicationBloc.currentLocation!.longitude),
+    ));
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Maps"),
-        backgroundColor: Colors.green[900],
+        backgroundColor: Colors.redAccent,
         actions: [
           IconButton(
             onPressed: () async {
@@ -71,7 +77,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                     applicationBloc.currentLocation!.longitude),
                 zoom: 30,
               ),
-            
+
               //markers: Set<Marker>.of(applicationBloc.markers),
               markers: Set.from(allMarkers),
             ),

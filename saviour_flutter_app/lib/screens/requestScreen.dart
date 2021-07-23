@@ -48,7 +48,7 @@ class _RequestScreenState extends State<RequestScreen> {
           },
         ),
         title: Text("Request Blood"),
-        backgroundColor: Colors.brown[900],
+        backgroundColor: Colors.redAccent,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -214,7 +214,6 @@ class _RequestScreenState extends State<RequestScreen> {
                             width: 30.0,
                           ),
                           Container(
-                            
                             //color: Colors.blue,
                             child: DropdownButton<String>(
                               focusColor: Colors.black,
@@ -264,15 +263,14 @@ class _RequestScreenState extends State<RequestScreen> {
                         height: 30.0,
                       ),
                       Container(
-                          margin:EdgeInsets.only(left: 230),
-                          child: ElevatedButton(
-                          
+                        margin: EdgeInsets.only(left: 230),
+                        child: ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => donorsList(
+                                      builder: (context) => DonorsList(
                                             pincode: pincodeController.text,
                                           )),
                                 );

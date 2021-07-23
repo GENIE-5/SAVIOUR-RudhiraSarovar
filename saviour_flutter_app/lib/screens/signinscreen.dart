@@ -53,7 +53,8 @@ class _SignInPageState extends State<SignInPage> {
                         'SAVIOUR',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.redAccent,
+                            //fontFamily: ,
+                            color: Colors.red,
                             fontSize: 40),
                       ),
                       SizedBox(

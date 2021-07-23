@@ -12,7 +12,7 @@ class _AboutPageState extends State<AboutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:AppBar(
-        backgroundColor:Colors.redAccent[200],
+        backgroundColor:Colors.red,
         title: Text("About"),
         
       ),

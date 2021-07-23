@@ -51,7 +51,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Maps"),
-        backgroundColor: Colors.redAccent[200],
+        backgroundColor: Colors.green[900],
         actions: [
           IconButton(
             onPressed: () async {
@@ -69,9 +69,10 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
               initialCameraPosition: CameraPosition(
                 target: LatLng(applicationBloc.currentLocation!.latitude,
                     applicationBloc.currentLocation!.longitude),
-                zoom: 40,
+                zoom: 30,
               ),
-              // markers: Set<Marker>.of(applicationBloc.markers),
+            
+              //markers: Set<Marker>.of(applicationBloc.markers),
               markers: Set.from(allMarkers),
             ),
       floatingActionButton: getFooter(),

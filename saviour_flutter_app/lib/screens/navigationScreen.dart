@@ -76,7 +76,10 @@ class _NavigationPageState extends State<NavigationPage> {
         ListTile(
           title: Text("Request"),
           onTap: () {
-            RequestHandler().getDonorsDataFromPincode(pincode: "505462");
+            // RequestHandler().getDonorsDataFromPincode(pincode: "505462");
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return RequestScreen();
+            }));
           },
         ),
       ],

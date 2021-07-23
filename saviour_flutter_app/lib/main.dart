@@ -28,7 +28,8 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             home: SignInPage(),
             theme: ThemeData(
-              brightness: Brightness.dark,
+              //primaryColor: Colors.black,
+              brightness: Brightness.light,
             )));
   }
 }

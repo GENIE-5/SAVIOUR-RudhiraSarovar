@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:saviour_flutter_app/screens/donorsListScreen.dart';
-import 'package:saviour_flutter_app/screens/home.dart'
+import 'package:saviour_flutter_app/screens/home.dart';
 
 class RequestScreen extends StatefulWidget {
   const RequestScreen({Key? key}) : super(key: key);
@@ -20,7 +19,7 @@ class _RequestScreenState extends State<RequestScreen> {
   TextEditingController pincodeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var selectedRadio;
-  
+
   @override
   void initState() {
     super.initState();
@@ -49,7 +48,7 @@ class _RequestScreenState extends State<RequestScreen> {
           },
         ),
         title: Text("Request Blood"),
-        backgroundColor: Colors.redAccent[200],
+        backgroundColor: Colors.brown[900],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -81,7 +80,7 @@ class _RequestScreenState extends State<RequestScreen> {
                         height: 20.0,
                       ),
                       Text(
-                        'Phone Numner',
+                        'Phone Number',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -215,7 +214,8 @@ class _RequestScreenState extends State<RequestScreen> {
                             width: 30.0,
                           ),
                           Container(
-                            color: Colors.blue,
+                            
+                            //color: Colors.blue,
                             child: DropdownButton<String>(
                               focusColor: Colors.black,
                               items:
@@ -263,19 +263,23 @@ class _RequestScreenState extends State<RequestScreen> {
                       SizedBox(
                         height: 30.0,
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => donorsList(
-                                          pincode: pincodeController.text,
-                                        )),
-                              );
-                            }
-                          },
-                          child: Text('Request'))
+                      Container(
+                          margin:EdgeInsets.only(left: 230),
+                          child: ElevatedButton(
+                          
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => donorsList(
+                                            pincode: pincodeController.text,
+                                          )),
+                                );
+                              }
+                            },
+                            child: Text('Request')),
+                      )
                     ],
                   ),
                 ),

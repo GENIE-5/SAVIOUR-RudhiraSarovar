@@ -31,8 +31,8 @@ class _State extends State<CardsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
-        backgroundColor: Colors.redAccent[200],
-        iconTheme: IconThemeData(opacity: 3.0),
+        backgroundColor: Colors.blue[900],
+        iconTheme: IconThemeData(color:Colors.white,opacity: 3.0),
         actions: [
           IconButton(
               onPressed: () async {
@@ -46,7 +46,7 @@ class _State extends State<CardsScreen> {
               icon: Icon(Icons.person))
         ],
       ),
-      drawer: Drawer(child: NavigationPage()),
+      drawer: Drawer(child: NavigationPage() ),
       body: Homebody(),
     );
   }
@@ -88,7 +88,7 @@ class _CardsState extends State<Cards> {
     return Card(
         margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
         elevation: 10.0,
-        color: Colors.redAccent[200],
+        color: Colors.blue,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -105,9 +105,10 @@ class _CardsState extends State<Cards> {
                     return GoogleMapScreen();
                   }));
                 },
-                child: Text("Click here to get help"),
+                child: Text("Click here to get help",style: TextStyle(color: Colors.black),),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.deepOrangeAccent[100],
+                  primary: Colors.white,
+
                 ),
               )
             ],

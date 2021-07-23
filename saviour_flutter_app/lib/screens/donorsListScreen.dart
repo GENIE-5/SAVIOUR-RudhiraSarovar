@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:saviour_flutter_app/screens/databasemanagement.dart';
 
-class donorsList extends StatefulWidget {
+class DonorsList extends StatefulWidget {
   final pincode;
-  const donorsList({Key? key, required this.pincode}) : super(key: key);
+  const DonorsList({Key? key, required this.pincode}) : super(key: key);
 
   @override
-  _donorsListState createState() => _donorsListState(pincode);
+  _DonorsListState createState() => _DonorsListState(pincode);
 }
 
-class _donorsListState extends State<donorsList> {
+class _DonorsListState extends State<DonorsList> {
   final pincode;
-   List donors=[];
+  List donors = [];
   getDonors(pincode) async {
-    donors= await RequestHandler().getDonorsDataFromPincode(pincode: pincode);
+    donors = await RequestHandler().getDonorsDataFromPincode(pincode: pincode);
   }
 
-  _donorsListState(this.pincode);
+  _DonorsListState(this.pincode);
   @override
   void initState() {
     super.initState();

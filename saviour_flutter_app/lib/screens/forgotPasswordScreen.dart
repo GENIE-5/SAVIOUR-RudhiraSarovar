@@ -14,7 +14,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Forgot Password"),
-        backgroundColor: Colors.redAccent[200],
+        backgroundColor: Colors.red,
       ),
       body: Container(
         child: Column(
@@ -39,7 +39,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     TextFormField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: 'otp',
+                        labelText: 'Enter OTP',
                         hintText: '234566',
                         border: UnderlineInputBorder(),
                       ),

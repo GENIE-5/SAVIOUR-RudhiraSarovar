@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:saviour_flutter_app/screens/mapscreen.dart';
+ 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:saviour_flutter_app/screens/navigationScreen.dart';
 import 'package:saviour_flutter_app/screens/signinscreen.dart';
@@ -31,7 +31,7 @@ class _State extends State<CardsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.red,
         iconTheme: IconThemeData(color: Colors.white, opacity: 3.0),
         actions: [
           IconButton(
@@ -86,35 +86,15 @@ class _CardsState extends State<Cards> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
+         margin: EdgeInsets.fromLTRB(25.0, 15.0, 25.0, 25.0),
         elevation: 10.0,
-        color: Colors.redAccent,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Want some Help? Let's try",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+        color: Colors.red,
+        child:  Image(
+           // fit:BoxFit.fill,
+            image: NetworkImage(
+              "https://thumbs.dreamstime.com/b/giving-blood-saves-lifes-blood-donation-give-life-business-team-76653412.jpg"),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return GoogleMapScreen();
-                  }));
-                },
-                child: Text(
-                  "Click here to get help",
-                  style: TextStyle(color: Colors.black),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
-                ),
-              )
-            ],
-          ),
-        ));
+        
+        );
   }
 }

@@ -30,6 +30,7 @@ class _MyAppState extends State<MyApp> {
             theme: ThemeData(
               primaryColor: Colors.black,
               accentColor: Colors.black,
+              brightness: Brightness.dark,
             )));
   }
 }

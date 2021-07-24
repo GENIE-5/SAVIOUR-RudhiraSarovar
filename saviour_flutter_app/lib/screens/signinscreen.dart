@@ -130,7 +130,7 @@ class _SignInPageState extends State<SignInPage> {
                             child: Text("Forgot password?"),
                             style: ButtonStyle(
                                 foregroundColor:
-                                    MaterialStateProperty.all(Colors.red[300])),
+                                    MaterialStateProperty.all(Colors.red)),
                           ),
                         ],
                       ),

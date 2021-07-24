@@ -57,7 +57,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Maps"),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.red,
         actions: [
           IconButton(
             onPressed: () async {
